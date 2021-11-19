@@ -9,6 +9,9 @@ var curRotation = 0
 var curRotSpeed = 0
 
 onready var SpawnBulletPoint: Spatial = get_node("SpawnBullet")
+onready var SpaceShipMesh: MeshInstance = get_node("Cube")
+
+onready var Bullet: Resource = load("res://Scenes/Bullet.tscn")
 
 func _ready():
 	pass
@@ -39,12 +42,10 @@ func _process(delta):
 	curRotation = clamp(curRotation,-20,20)
 	curRotSpeed = clamp(curRotSpeed,0,MAXROTSPEED)
 	
-	self.rotation.x = deg2rad(-curRotation)
+	SpaceShipMesh.rotation.x = deg2rad(-curRotation)
 	move_and_slide(Vector3(move.y,0,move.x))
 	
 	if Input.is_action_just_pressed("Shoot"):
-		var Bullet: Resource = load("res://Scenes/Bullet.tscn")
 		var BulletInstance: KinematicBody = Bullet.instance()
 		BulletInstance.global_transform = SpawnBulletPoint.global_transform
 		get_parent().add_child(BulletInstance)
-		
