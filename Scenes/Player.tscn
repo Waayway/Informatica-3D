@@ -126,10 +126,10 @@ surfaces/0 = {
 "vertex_count": 1378
 }
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0, 0.396078, 0.466667, 1 )
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 2.07635, 0.85392, 1.48988 )
 
 [node name="Player" type="KinematicBody"]
@@ -138,8 +138,11 @@ script = ExtResource( 1 )
 [node name="Cube" type="MeshInstance" parent="."]
 transform = Transform( 0.98847, 0, 0, 0, 0.31942, 0, 0, 0, 0.31942, 0, 0, 0 )
 mesh = SubResource( 3 )
-material/0 = SubResource( 5 )
+material/0 = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, 0, 2, 0, 1, 0, -1, 0, -8.74228e-08, 0.75, 0.4, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
+
+[node name="SpawnBullet" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, -0.25, 0 )
