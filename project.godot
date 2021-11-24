@@ -14,6 +14,10 @@ config/name="Informatica 3d"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SaveGame="*res://Scenes/SaveGame.tscn"
+
 [input]
 
 Left={

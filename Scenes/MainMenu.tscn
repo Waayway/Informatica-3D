@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/TestEnviroment.tres" type="Environment" id=1]
 [ext_resource path="res://Scenes/Player.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/MainMenuTheme.tres" type="Theme" id=4]
 
 [sub_resource type="Shader" id=1]
 resource_name = "Shader Nodetree"
@@ -131,20 +132,20 @@ surfaces/0 = {
 [node name="Main Menu" type="Spatial"]
 script = ExtResource( 3 )
 
-[node name="Control" type="Control" parent="."]
+[node name="Main" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -545.0
+theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Play" type="Button" parent="Control"]
-margin_left = 113.495
-margin_top = 324.42
-margin_right = 151.495
-margin_bottom = 349.42
-rect_scale = Vector2( 3, 3 )
+[node name="Play" type="Button" parent="Main"]
+margin_left = 58.3865
+margin_top = 286.966
+margin_right = 144.386
+margin_bottom = 345.966
 action_mode = 0
 text = "Play"
 flat = true
@@ -152,12 +153,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quit" type="Button" parent="Control"]
-margin_left = 111.0
-margin_top = 404.0
-margin_right = 149.0
-margin_bottom = 429.0
-rect_scale = Vector2( 3, 3 )
+[node name="Quit" type="Button" parent="Main"]
+margin_left = 60.0958
+margin_top = 361.891
+margin_right = 146.096
+margin_bottom = 420.891
 action_mode = 0
 text = "Quit"
 flat = true
@@ -165,13 +165,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
-margin_left = 49.4433
-margin_top = 225.664
-margin_right = 177.443
-margin_bottom = 242.664
-rect_scale = Vector2( 4, 4 )
-text = "Rocket Shooting 3D"
+[node name="Label" type="Label" parent="Main"]
+margin_left = 39.1454
+margin_top = 197.395
+margin_right = 375.145
+margin_bottom = 306.395
+text = "Rocket Shooting 3D
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 1 )
@@ -184,5 +187,46 @@ transform = Transform( 0.821144, 0, 0.177817, 0, 0.31942, 0, -0.550269, 0, 0.265
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
 
-[connection signal="pressed" from="Control/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="Control/Quit" to="." method="_on_Quit_pressed"]
+[node name="Loading" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -479.0
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Loading"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = -105.0
+margin_right = 355.0
+margin_bottom = -52.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Loading/HBoxContainer"]
+margin_right = 169.0
+margin_bottom = 53.0
+text = "Loading..."
+
+[node name="ProgressBar" type="ProgressBar" parent="Loading/HBoxContainer"]
+margin_left = 173.0
+margin_right = 773.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 600, 53 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadingDone" type="Timer" parent="Loading/HBoxContainer"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="pressed" from="Main/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Main/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="timeout" from="Loading/HBoxContainer/LoadingDone" to="." method="_on_loading_done_timer"]

@@ -11,7 +11,7 @@ func _process(delta):
 func _on_Area_area_entered(area):
 	get_parent().pause()
 
-
 func _on_Area2_area_entered(area):
+	get_node("/root/SaveGame").currentScore += 1
 	area.get_parent().queue_free()
 	queue_free()

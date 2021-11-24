@@ -11,7 +11,7 @@ var curRotSpeed = 0
 onready var SpawnBulletPoint: Spatial = get_node("SpawnBullet")
 onready var SpaceShipMesh: MeshInstance = get_node("Cube")
 
-onready var Bullet: Resource = load("res://Scenes/Bullet.tscn")
+onready var Bullet: Resource = preload("res://Scenes/Bullet.tscn")
 
 func _ready():
 	pass

@@ -68,6 +68,7 @@ autostart = true
 
 [node name="StoppedGamePopup" type="Popup" parent="."]
 pause_mode = 2
+visible = true
 margin_right = 698.0
 margin_bottom = 350.0
 __meta__ = {
@@ -90,6 +91,18 @@ margin_top = 327.427
 margin_right = 672.051
 margin_bottom = 499.427
 text = "Restart?"
+
+[node name="Label" type="Label" parent="StoppedGamePopup"]
+margin_left = 357.96
+margin_top = 201.04
+margin_right = 667.96
+margin_bottom = 239.04
+text = "Score: 100
+High Score: 100"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]
 [connection signal="pressed" from="StoppedGamePopup/Button" to="." method="_on_Button_pressed"]

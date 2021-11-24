@@ -1,7 +1,7 @@
 extends Spatial
 
 onready var timer: Timer = get_node("Timer")
-onready var Astroid: Resource = load("res://Scenes/Astroid.tscn")
+onready var Astroid: Resource = preload("res://Scenes/Astroid.tscn")
 
 func _ready():
 	pass
@@ -12,6 +12,9 @@ func OnTimerTimeout():
 	add_child(AstroidInstance)
 
 func pause():
+	var SaveGame = get_node("/root/SaveGame")
+	SaveGame.save_game()
+	get_node("StoppedGamePopup/Label").text = "Score: "+str(SaveGame.currentScore)+"\nHigh Score: "+str(SaveGame.highScore)
 	get_tree().paused = true
 	$StoppedGamePopup.show()
 
