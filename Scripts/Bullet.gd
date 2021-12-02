@@ -1,7 +1,6 @@
 extends KinematicBody
 
 export var SPEED: float = 10000
-
 func _ready():
 	pass
 

@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 SaveGame="*res://Scenes/SaveGame.tscn"
+MaterialCache="*res://Scenes/MaterialCache.tscn"
 
 [input]
 

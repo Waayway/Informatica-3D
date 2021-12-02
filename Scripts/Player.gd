@@ -1,20 +1,19 @@
 extends KinematicBody
 
-
-export var SPEED = 500
-export var MAXROTSPEED = 2
-export var ROTSPEEDUP = 0.2
-
-var curRotation = 0
-var curRotSpeed = 0
+export var SPEED = 1000
+export var ROTSPEED = 5
 
 onready var SpawnBulletPoint: Spatial = get_node("SpawnBullet")
 onready var SpaceShipMesh: MeshInstance = get_node("Cube")
 
 onready var Bullet: Resource = preload("res://Scenes/Bullet.tscn")
 
+onready var tween: Tween = get_node("Tween")
+
 func _ready():
-	pass
+	var BulletInstance: KinematicBody = Bullet.instance()
+	BulletInstance.global_transform = SpawnBulletPoint.global_transform
+	get_parent().add_child(BulletInstance)
 
 func _process(delta):
 	var direction: Vector2 = Vector2.ZERO
@@ -23,26 +22,15 @@ func _process(delta):
 	
 	var move: Vector2 = -direction*delta*SPEED
 	
-	if curRotation == 0 && direction.x == 0:
-		curRotSpeed = 0.1
+	var angle = 0
 	if direction.x == 1:
-		curRotation += curRotSpeed
-		curRotSpeed += ROTSPEEDUP
+		angle = SpaceShipMesh.rotation.move_toward(Vector3(deg2rad(-20),0,0),delta*ROTSPEED).x
 	elif direction.x == -1:
-		curRotation -= curRotSpeed
-		curRotSpeed += ROTSPEEDUP
+		angle = SpaceShipMesh.rotation.move_toward(Vector3(deg2rad(20),0,0),delta*ROTSPEED).x
 	else:
-		if curRotation < 0:
-			curRotation += curRotSpeed
-			curRotSpeed += ROTSPEEDUP
-		elif curRotation > 0:
-			curRotation -= curRotSpeed
-			curRotSpeed += ROTSPEEDUP
+		angle = SpaceShipMesh.rotation.move_toward(Vector3(0,0,0),delta*ROTSPEED).x
 	
-	curRotation = clamp(curRotation,-20,20)
-	curRotSpeed = clamp(curRotSpeed,0,MAXROTSPEED)
-	
-	SpaceShipMesh.rotation.x = deg2rad(-curRotation)
+	SpaceShipMesh.rotation.x = angle
 	move_and_slide(Vector3(move.y,0,move.x))
 	
 	if Input.is_action_just_pressed("Shoot"):

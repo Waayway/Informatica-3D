@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/TestEnviroment.tres" type="Environment" id=1]
-[ext_resource path="res://Scenes/Player.tres" type="Material" id=2]
+[ext_resource path="res://Materials/Player.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/MainMenuTheme.tres" type="Theme" id=4]
+[ext_resource path="res://Scripts/MaterialCache.gd" type="Script" id=5]
 
 [sub_resource type="Shader" id=1]
 resource_name = "Shader Nodetree"
@@ -179,7 +180,7 @@ __meta__ = {
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 1 )
 
-[node name="Camera" type="Camera" parent="."]
+[node name="Camera" type="Camera" parent="." groups=["camera"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05803, 2.07023 )
 
 [node name="Cube" type="MeshInstance" parent="."]
@@ -226,6 +227,10 @@ __meta__ = {
 [node name="LoadingDone" type="Timer" parent="Loading/HBoxContainer"]
 wait_time = 0.5
 one_shot = true
+
+[node name="MaterialCache" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.16017, 0 )
+script = ExtResource( 5 )
 
 [connection signal="pressed" from="Main/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Main/Quit" to="." method="_on_Quit_pressed"]
