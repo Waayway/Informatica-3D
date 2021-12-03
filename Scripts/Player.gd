@@ -8,7 +8,6 @@ onready var SpaceShipMesh: MeshInstance = get_node("Cube")
 
 onready var Bullet: Resource = preload("res://Scenes/Bullet.tscn")
 
-onready var tween: Tween = get_node("Tween")
 
 func _ready():
 	var BulletInstance: KinematicBody = Bullet.instance()

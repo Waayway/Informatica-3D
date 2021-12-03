@@ -4,6 +4,7 @@ signal replace_main_scene
 
 onready var main: Control = get_node("Main")
 onready var loading: Control = get_node("Loading")
+onready var options: Control = get_node("Options")
 
 onready var loading_progress: ProgressBar = get_node("Loading/HBoxContainer/ProgressBar")
 onready var loading_done_timer: Timer = get_node("Loading/HBoxContainer/LoadingDone")
@@ -49,7 +50,7 @@ func _on_Play_pressed():
 		loading_thread = Thread.new()
 		#warning-ignore:return_value_discarded
 		loading_thread.start(self, "interactive_load", res_loader)
-#	get_tree().change_scene("res://Scenes/MainScene.tscn")
+		#get_tree().change_scene("res://Scenes/MainScene.tscn")
 
 
 func _on_Quit_pressed():
@@ -72,4 +73,16 @@ func change_scene(resource : Resource):
 	add_child(node)
 
 
+func _on_Options_pressed():
+	options.show()
+	main.hide()
+	
 
+
+func _on_Exit_Options_pressed():
+	options.hide()
+	main.show()
+
+
+func _on_CheckButton_toggled(button_pressed):
+	OS.window_fullscreen = button_pressed

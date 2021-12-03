@@ -7,7 +7,6 @@ var _count := 0
 
 func _ready() -> void:
 	_find_all_materials("res://")
-	print(_materials)
 	for m in _materials:
 		_create_mesh_with(m)
 	for p in _process_materials:
